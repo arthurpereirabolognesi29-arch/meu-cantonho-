@@ -2,190 +2,395 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>gudgud 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>meu cantinho</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
   <style>
-    * {
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
     }
+
+    :root {
+      --bg: #095194;
+      --bg-card: #EDEAE2;
+      --text: #000000;
+      --text-muted: #dfce99;
+      --text-faint: #B0AC9E;
+      --accent: #000000;
+      --accent-light: #F0DDD0;
+      --border: rgba(28, 26, 22, 0.1);
+      --border-strong: rgba(28, 26, 22, 0.18);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      height: 100vh;
-      background: radial-gradient(circle at top, #3b003b, #000);
-      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Layout ── */
+    .site-wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ── Header / Hero ── */
+    header {
+      padding: 5rem 0 3.5rem;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    header h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 6vw, 3.5rem);
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+
+    header h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    header p {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 420px;
+      line-height: 1.8;
+    }
+
+    .tags {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 1.75rem;
     }
 
-    /* Corações flutuando */
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      transform: rotate(45deg);
-      animation: float 10s linear infinite;
-      opacity: 0.7;
+    .tag {
+      font-size: 12px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      color: var(--text-muted);
+      background: transparent;
+      transition: all 0.2s;
+      cursor: default;
     }
 
-    .heart::before,
-    .heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      border-radius: 50%;
+    .tag:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
-    .heart::before {
-      top: -10px;
-      left: 0;
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0.5rem 0;
     }
 
-    .heart::after {
-      left: -10px;
-      top: 0;
+    /* ── Section ── */
+    section {
+      padding: 3rem 0;
+      animation: fadeUp 0.7s ease both;
     }
 
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(45deg); }
-      100% { transform: translateY(-120vh) rotate(45deg); }
+    section:nth-child(2) { animation-delay: 0.1s; }
+    section:nth-child(3) { animation-delay: 0.2s; }
+    section:nth-child(4) { animation-delay: 0.3s; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1.75rem;
     }
 
-    /* Centro */
-    .center {
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      font-weight: 400;
+    }
+
+    /* ── Now cards ── */
+    .now-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .now-card {
+      background: var(--bg);
+      padding: 1.25rem;
+      transition: background 0.2s;
+    }
+
+    .now-card:hover { background: var(--accent-light); }
+
+    .now-card .icon {
+      font-size: 18px;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .now-card h3 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .now-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .titem {
+      display: flex;
+      gap: 20px;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
       position: relative;
-      text-align: center;
-      z-index: 10;
     }
 
-    .name {
-      font-size: 72px;
-      color: #ff4fd8;
-      text-shadow: 0 0 20px #ff4fd8, 0 0 40px #ff008c;
-      animation: pulse 2s infinite;
+    .titem:last-child { border-bottom: none; }
+
+    .tdate {
+      font-size: 11px;
+      color: var(--text-faint);
+      min-width: 80px;
+      padding-top: 3px;
+      font-variant-numeric: tabular-nums;
     }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
+    .titem-body h4 {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 3px;
     }
 
-    /* Coração grande */
-    .big-heart {
-      width: 220px;
-      height: 220px;
-      background: #ff0055;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(45deg);
-      z-index: -1;
-      box-shadow: 0 0 50px #ff0055;
+    .titem-body p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
-    .big-heart::before,
-    .big-heart::after {
-      content: '';
-      width: 220px;
-      height: 220px;
-      background: #ff0055;
-      border-radius: 50%;
-      position: absolute;
+    .titem-body .badge {
+      display: inline-block;
+      font-size: 10px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: var(--accent-light);
+      color: var(--accent);
+      margin-top: 6px;
+      font-weight: 400;
     }
 
-    .big-heart::before { top: -110px; left: 0; }
-    .big-heart::after { left: -110px; top: 0; }
-
-    /* Ícones */
-    .icon {
-      position: absolute;
-      font-size: 40px;
-      animation: spin 12s linear infinite;
+    /* ── Pensamentos ── */
+    .thought-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
     }
 
-    .bat { color: #b36bff; }
-    .skate { color: #00ffcc; }
-    .plant { color: #3cff00; }
-
-    @keyframes spin {
-      from { transform: rotate(0deg) translateX(260px) rotate(0deg); }
-      to { transform: rotate(360deg) translateX(260px) rotate(-360deg); }
+    .thought {
+      background: var(--bg);
+      padding: 1.25rem 1.5rem;
+      transition: background 0.2s;
+      cursor: default;
     }
 
-    /* Fumaça */
-    .smoke {
-      position: absolute;
-      bottom: 0;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(255,255,255,0.3), transparent);
-      filter: blur(30px);
-      animation: smoke 6s infinite alternate;
+    .thought:hover { background: var(--bg-card); }
+
+    .thought p {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--text);
+      font-style: italic;
+      line-height: 1.6;
     }
 
-    @keyframes smoke {
-      from { transform: translateY(0); opacity: 0.4; }
-      to { transform: translateY(-60px); opacity: 0.7; }
-    }
-  
-    /* Personagem fofo (gif) */
-    .chara {
-      position: absolute;
-      width: 120px;
-      animation: fly 12s linear infinite;
-      opacity: 0.9;
-      pointer-events: none;
+    .thought small {
+      display: block;
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-top: 6px;
+      font-style: normal;
+      font-family: var(--sans);
     }
 
-    @keyframes fly {
-      from { transform: translateY(110vh) scale(0.8); }
-      to { transform: translateY(-140vh) scale(1); }
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+
+    footer a {
+      color: var(--text-faint);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 520px) {
+      .now-grid {
+        grid-template-columns: 1fr;
+      }
+      footer {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="site-wrapper">
 
-  <!-- muitos corações -->
-  <script>
-    // corações
-    for (let i = 0; i < 80; i++) {
-      const h = document.createElement('div');
-      h.className = 'heart';
-      h.style.left = Math.random() * 100 + 'vw';
-      h.style.animationDuration = 6 + Math.random() * 6 + 's';
-      h.style.opacity = Math.random();
-      document.body.appendChild(h);
-    }
+    <header>
+      <p class="eyebrow">um cantinho meu</p>
+      <h1>olá, eu sou<br><em> Ruhtraxbr</em></h1>
+      <p>esse site não tem propósito definido e é exatamente assim que eu quero. um lugar pra guardar coisas, experimentar ideias e me divertir.</p>
+      <div class="tags">
+        <span class="tag">músicas</span>
+        <span class="tag">filmes</span>
+        <span class="tag">ideias aleatórias</span>
+        <span class="tag">projetos</span>
+        <span class="tag">fotos</span>
+        <span class="tag">✦ e mais arthurpereirabolognesi29@gmail.com</span>
+      </div>
+    </header>
 
-    // vários personagens fofos
-    for (let i = 0; i < 12; i++) {
-      const c = document.createElement('img');
-      c.src = 'sinnamarrol gudgud.gif';
-      c.className = 'chara';
-      c.style.left = Math.random() * 90 + 'vw';
-      c.style.animationDuration = 8 + Math.random() * 10 + 's';
-      c.style.animationDelay = Math.random() * 5 + 's';
-      document.body.appendChild(c);
-    }
-  </script>
+    <div class="divider"></div>
 
-  <div class="center">
-    <div class="big-heart"></div>
-    <div class="name">gugud</div>
+    <section>
+      <div class="section-header">
+        <span class="section-label">ultimamente gostando de programar</span>
+      </div>
+      <div class="now-grid">
+        <div class="now-card">
+          <span class="icon">🎵</span>
+          <h3>música do mês</h3>
+          <p>SELVA RUSSA
+            https://youtu.be/E1lEYbuDb80?si=Y0GRvzn_aiAS0OUt</p>
+        </div>
+        <div class="now-card">
+          <span class="icon">📺</span>
+          <h3>série em andamento</h3>
+          <p>noobees</p>
+        </div>
+        <div class="now-card">
+          <span class="icon">📖</span>
+          <h3>livro aberto</h3>
+          <p>pokémon platinum</p>
+        </div>
+      </div>
+    </section>
 
-    <div class="icon bat" style="animation-delay: 0s">🦇</div>
-    <div class="icon skate" style="animation-delay: 2s">🛹</div>
-    <div class="icon plant" style="animation-delay: 4s">🌿</div>
+    <div class="divider"></div>
+
+    <section>
+      <div class="section-header">
+        <span class="section-label">linha do tempo</span>
+      </div>
+      <div class="timeline">
+        <div class="titem">
+          <span class="tdate">abr 2026</span>
+          <div class="titem-body">
+            <h4>criei esse site</h4>
+            <p>começo de tudo. sem planos, só vontade.</p>
+            <span class="badge">marco zero</span>
+          </div>
+        </div>
+        <div class="titem">
+          <span class="tdate">em breve</span>
+          <div class="titem-body">
+            <h4>próxima entrada...</h4>
+            <p>acontece quando acontece.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section>
+      <div class="section-header">
+        <span class="section-label">pensamentos soltos</span>
+      </div>
+      <div class="thought-list">
+        <div class="thought">
+          <p>"Eu sou um cara muito otario mesmo eu faço dois site para mesma menina e ela ainda me chama de amigo e mesmo com essa palavra AMIGO eu ainda a amo"</p>
+          <small>você · hoje</small>
+        </div>
+        <div class="thought">
+          <p>"esse site vai mudar com o tempo e tudo bem — mudança é parte do projeto."</p>
+          <small>você · abr 2026</small>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>feito com calma · em constante mudança</span>
+      <span>© 2026 <a href="#">Ruhtraxbr</a></span>
+    </footer>
+
   </div>
-
-  <div class="smoke" style="left: 20%"></div>
-  <div class="smoke" style="left: 60%"></div>
-
 </body>
 </html>
-
