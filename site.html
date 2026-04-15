@@ -41,14 +41,12 @@
       overflow-x: hidden;
     }
 
-    /* ── Layout ── */
     .site-wrapper {
       max-width: 680px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
 
-    /* ── Header / Hero ── */
     header {
       padding: 5rem 0 3.5rem;
       animation: fadeUp 0.7s ease both;
@@ -107,14 +105,12 @@
       color: var(--accent);
     }
 
-    /* ── Divider ── */
     .divider {
       height: 1px;
       background: var(--border);
       margin: 0.5rem 0;
     }
 
-    /* ── Section ── */
     section {
       padding: 3rem 0;
       animation: fadeUp 0.7s ease both;
@@ -139,7 +135,6 @@
       font-weight: 400;
     }
 
-    /* ── Now cards ── */
     .now-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -177,7 +172,6 @@
       line-height: 1.6;
     }
 
-    /* ── Timeline ── */
     .timeline {
       display: flex;
       flex-direction: column;
@@ -225,7 +219,6 @@
       font-weight: 400;
     }
 
-    /* ── Pensamentos ── */
     .thought-list {
       display: flex;
       flex-direction: column;
@@ -262,7 +255,6 @@
       font-family: var(--sans);
     }
 
-    /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
       padding: 2.5rem 0 4rem;
@@ -281,13 +273,11 @@
 
     footer a:hover { color: var(--accent); }
 
-    /* ── Animations ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── Responsive ── */
     @media (max-width: 520px) {
       .now-grid {
         grid-template-columns: 1fr;
@@ -327,7 +317,7 @@
         <div class="now-card">
           <span class="icon">🎵</span>
           <h3>música do mês</h3>
-          <p>SELVA RUSSA 
+          <p>SELVA RUSSA
             https://youtu.be/E1lEYbuDb80?si=Y0GRvzn_aiAS0OUt</p>
         </div>
         <div class="now-card">
@@ -386,11 +376,72 @@
       </div>
     </section>
 
+    <div class="divider"></div>
+
+    <section>
+      <div class="section-header">
+        <span class="section-label">fala comigo</span>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem;">
+        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem;">
+          manda uma mensagem — respondo quando puder, sem pressa.
+        </p>
+
+        <div id="contact-form">
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px;">
+            <input id="c-nome" type="text" placeholder="seu nome (opcional)"
+              style="padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); color: #fff; font-family: var(--sans); font-size: 14px; outline: none;" />
+            <input id="c-email" type="email" placeholder="seu email (pra eu responder)"
+              style="padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); color: #fff; font-family: var(--sans); font-size: 14px; outline: none;" />
+            <textarea id="c-msg" placeholder="o que você queria dizer..."
+              style="padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); color: #fff; font-family: var(--sans); font-size: 14px; outline: none; resize: vertical; min-height: 100px; line-height: 1.6;"></textarea>
+          </div>
+
+          <button onclick="enviarMsg()"
+            style="padding: 10px 22px; border-radius: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-family: var(--sans); font-size: 13px; cursor: pointer;">
+            enviar mensagem
+          </button>
+
+          <p style="font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 10px;">
+            ou direto:
+            <a href="mailto:arthurpereirabolognesi29@gmail.com"
+              style="color: rgba(255,255,255,0.4); text-decoration: none;">
+              arthurpereirabolognesi29@gmail.com
+            </a>
+          </p>
+        </div>
+
+        <div id="contact-ok" style="display:none; text-align:center; padding: 1.5rem 0;">
+          <p style="font-family: var(--serif); font-style:italic; font-size:17px; color: var(--text-muted);">
+            "mensagem recebida com carinho."
+          </p>
+          <small style="font-size:12px; color: var(--text-faint); display:block; margin-top:6px;">
+            obrigado por passar por aqui ✦
+          </small>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <span>feito com calma · em constante mudança</span>
       <span>© 2026 <a href="#">Ruhtraxbr</a></span>
     </footer>
 
   </div>
+
+  <script>
+    function enviarMsg() {
+      var msg = document.getElementById('c-msg').value;
+      if (!msg.trim()) { alert('escreve alguma coisa :)'); return; }
+      var nome = document.getElementById('c-nome').value;
+      var email = document.getElementById('c-email').value;
+      var assunto = 'mensagem do cantinho' + (nome ? ' - ' + nome : '');
+      var corpo = msg + (email ? '\n\nresponder para: ' + email : '');
+      window.location.href = 'mailto:arthurpereirabolognesi29@gmail.com?subject=' + encodeURIComponent(assunto) + '&body=' + encodeURIComponent(corpo);
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('contact-ok').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
